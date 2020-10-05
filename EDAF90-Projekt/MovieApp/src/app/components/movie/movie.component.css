@@ -1,0 +1,23 @@
+.poster-image, .backdrop-image {
+  margin-top: 16px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cast-image {
+  max-height: 100px;
+}
+
+.mat-table {
+  width: 100%;
+}
+
+.table-container {
+  max-height: 74vh;
+  overflow-y: scroll;
+}
+
+.table-link {
+  margin-left: 8px;
+}

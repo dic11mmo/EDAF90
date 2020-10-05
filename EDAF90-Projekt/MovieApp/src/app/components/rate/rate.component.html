@@ -1,0 +1,10 @@
+<h2>Rate our page</h2>
+<div fxLayout="row"> 
+  <ng-container *ngFor="let star of stars">
+    <app-star (starEnter)= "onStarEnter($event)" (starLeave)="onStarLeave()"
+      (starClicked)="onStarClick($event)"
+      [starId]="star"
+      [rating]="hoverState || rating"
+    ></app-star>
+  </ng-container>
+</div>

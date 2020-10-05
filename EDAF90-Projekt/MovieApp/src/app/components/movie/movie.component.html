@@ -1,0 +1,54 @@
+<div *ngIf="(fullMovie | async); let movie">
+  <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
+    <div fxFlex="100%" fxFlex.gt-sm="40%">
+      <h2>{{movie.title}}</h2>
+      <p>Release date: {{movie.releaseDate | date}}</p>
+      <p>Run time: {{movie.runtime}} minutes</p>
+      <p>{{movie.genres | joinGenres}}</p>
+      <div class="rating-wrapper">
+        <mat-icon *ngFor="let ind of movie.voteAverage | rating" color="accent">stars</mat-icon>
+      </div>
+      <p>{{movie.overview}}</p>
+    </div>
+    <div fxFlex="100%" fxFlex.gt-sm="60%">
+      <mat-tab-group>
+        <mat-tab label="Cast">
+          <div class="table-container">
+            <table mat-table [dataSource]="movieCast">
+              <ng-container matColumnDef="image">
+                <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
+                <mat-cell *matCellDef="let member">
+                  <img *ngIf="member.profilePath" class="cast-image" src="https://image.tmdb.org/t/p/w200{{member.profilePath}}">
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="character">
+                <mat-header-cell *matHeaderCellDef> Character </mat-header-cell>
+                <mat-cell *matCellDef="let member"> {{member.character}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Actor </mat-header-cell>
+                <mat-cell *matCellDef="let member">
+                  <a mat-button class="mat-elevation-z4 table-link" color="accent" [routerLink]="['/actors/', member.id]">{{member.name}}</a>
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="movieCastColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: movieCastColumns;"></mat-row>
+            </table>
+          </div>
+        </mat-tab>
+        <mat-tab label="Poster" *ngIf="movie.posterPath">
+          <img class="poster-image" src="https://image.tmdb.org/t/p/w300{{movie.posterPath}}">
+        </mat-tab>
+        <mat-tab label="Backdrop" *ngIf="movie.backdropPath">
+          <img class="backdrop-image" src="https://image.tmdb.org/t/p/w500{{movie.backdropPath}}">
+        </mat-tab>
+        <mat-tab label="Trailer">
+          <div *ngIf="movieVideos | async | trailer; let trailer">
+            <youtube-player
+            videoId="{{trailer.key}}">
+            </youtube-player>
+          </div> 
+        </mat-tab>
+      </mat-tab-group>
+    </div>  
+</div>

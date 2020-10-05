@@ -1,0 +1,18 @@
+<div *ngIf="(fullSerie | async); let serie">
+  <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
+    <div fxFlex="100%" fxFlex.gt-sm="60%">
+      <h2>{{serie.name}}</h2>
+      <p>First air date: {{serie.firstAirDate | date}}</p>
+      <p *ngIf="serie.lastAirDate">Last air date: {{serie.lastAirDate | date}}</p>
+      <p>Seasons: {{serie.numberOfSeasons}}</p>
+      <p>Episodes: {{serie.numberOfEpisodes}}</p>
+      <p>{{serie.genres | joinGenres}}</p>
+      <div class="rating-wrapper">
+        <mat-icon *ngFor="let ind of serie.voteAverage | rating" color="accent">stars</mat-icon>
+      </div>
+      <p>{{serie.overview}}</p>
+    </div>
+    <div fxFlex="100%" fxFlex.gt-sm="40%">
+      <img *ngIf="serie.posterPath" class="poster-image" src="https://image.tmdb.org/t/p/w500{{serie.posterPath}}">
+    </div>  
+</div>

@@ -1,0 +1,15 @@
+<div *ngIf="(fullActor | async); let actor">
+  <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="16px">
+    <div fxFlex="100%" fxFlex.gt-sm="60%">
+      <h2>{{actor.name}}</h2>
+      <p>Birthday: {{actor.birthday | date}}</p>
+      <p>Place of birth: {{actor.placeOfBirth}}</p>
+      <p>{{actor.biography}}</p>
+    </div>
+    <div fxFlex="100%" fxFlex.gt-sm="40%">
+      <img *ngIf="actor.profilePath; else noImg" src="https://image.tmdb.org/t/p/w500{{actor.profilePath}}">
+      <ng-template #noImg>
+        <img src="../../../assets/no-img.svg">
+      </ng-template>
+    </div>  
+</div>

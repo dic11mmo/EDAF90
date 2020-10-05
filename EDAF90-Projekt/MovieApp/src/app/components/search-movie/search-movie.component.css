@@ -1,0 +1,12 @@
+.card-wrapper {
+  flex-wrap: wrap;
+}
+  
+.mat-card {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+button {
+  margin-left: 20px;
+}
